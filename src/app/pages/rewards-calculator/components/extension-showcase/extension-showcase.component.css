@@ -347,7 +347,9 @@
 }
 
 .manual-install-link {
-  display: inline-flex;
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
   align-items: center;
   gap: 7px;
   margin-top: 12px;

@@ -346,6 +346,27 @@
   outline-offset: 3px;
 }
 
+.manual-install-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 12px;
+  color: #315d37;
+  font-size: 12px;
+  font-weight: 750;
+  text-underline-offset: 3px;
+}
+
+.manual-install-link:hover {
+  color: #264b2c;
+}
+
+.manual-install-link:focus-visible {
+  border-radius: 2px;
+  outline: 3px solid #6a9561;
+  outline-offset: 3px;
+}
+
 .install-note {
   margin: 10px 0 0;
   color: #788177;

@@ -152,6 +152,14 @@ app-rewards-calculator[data-theme='dark'] .theme-toggle:hover {
   background: #e3f0dc;
 }
 
+app-rewards-calculator[data-theme='dark'] .manual-install-link {
+  color: #a7d29d;
+}
+
+app-rewards-calculator[data-theme='dark'] .manual-install-link:hover {
+  color: #c1e3b8;
+}
+
 app-rewards-calculator[data-theme='dark'] .custom-rate {
   border-color: #343e34;
   background: #252e25;

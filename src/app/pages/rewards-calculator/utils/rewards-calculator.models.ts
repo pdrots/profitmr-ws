@@ -124,6 +124,7 @@ export interface Copy {
   featurePrivacyTitle: string;
   featurePrivacy: string;
   installLink: string;
+  chromeManualLink: string;
   installNote: string;
   footerEstimate: string;
   checkRewards: string;

@@ -8,6 +8,8 @@ interface PurchaseStrategyInput {
   customMax: number;
   customAmount: number;
   customPoints: number;
+  customMaxPoints: number | null;
+  customPointsStep: number;
 }
 
 type CalculationError = 'noCombination' | 'invalidStrategy';
@@ -22,10 +24,20 @@ export function calculatePurchasePlan(input: PurchaseStrategyInput): Calculation
     amount: Math.round(card.amount * UNITS_PER_CURRENCY),
     points: card.points,
   }));
+  const pointsPerUnit = input.customMaxPoints !== null &&
+    input.customMaxPoints > input.customPoints &&
+    input.customAmount < input.customMax
+    ? (input.customMaxPoints - input.customPoints) / (input.customMax - input.customAmount)
+    : null;
   for (let amount = input.customMin; amount <= input.customMax; amount++) {
     options.push({
       amount: amount * UNITS_PER_CURRENCY,
-      points: Math.ceil((input.customPoints * amount) / input.customAmount),
+      points: pointsPerUnit === null
+        ? Math.ceil((input.customPoints * amount) / input.customAmount)
+        : input.customPointsStep === 1
+          ? Math.ceil(input.customPoints + pointsPerUnit * (amount - input.customAmount))
+          : Math.round((input.customPoints + pointsPerUnit * (amount - input.customAmount)) /
+            input.customPointsStep) * input.customPointsStep,
     });
   }
 
@@ -109,6 +121,8 @@ export function calculatePurchasePlan(input: PurchaseStrategyInput): Calculation
       totalAmount: chosenAmount,
       totalPoints: bestPoints[chosenAmount],
       customReferenceAmount: input.customAmount,
+      customMaxReferenceAmount: input.customMax,
+      customCalibrationUsed: pointsPerUnit !== null,
       cards,
     },
     error: null,

@@ -8,6 +8,7 @@ export function createEmptyValues(region: Region): CalculatorValues {
     rates: Object.fromEntries(region.fixedAmounts.map((amount) => [String(amount), null])),
     customAmount: region.customMin,
     customPoints: null,
+    customMaxPoints: null,
   };
 }
 
@@ -76,7 +77,8 @@ export function isCalculatorValues(value: unknown, region: Region): value is Cal
     Number.isInteger(value['customAmount']) &&
     value['customAmount'] >= region.customMin &&
     value['customAmount'] <= region.customMax &&
-    isOptionalPositiveInteger(value['customPoints'])
+    isOptionalPositiveInteger(value['customPoints']) &&
+    (value['customMaxPoints'] === undefined || isOptionalPositiveInteger(value['customMaxPoints']))
   );
 }
 

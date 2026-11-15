@@ -19,6 +19,7 @@ export interface Region {
   fixedAmounts: number[];
   customMin: number;
   customMax: number;
+  customPointsStep: number;
   fixedRewardSkus: Record<string, string>;
   customRewardSku: string;
 }
@@ -29,6 +30,7 @@ export interface CalculatorValues {
   rates: Record<string, number | null>;
   customAmount: number;
   customPoints: number | null;
+  customMaxPoints?: number | null;
 }
 
 export interface StoredState {
@@ -60,6 +62,8 @@ export interface PurchasePlan {
   totalAmount: number;
   totalPoints: number;
   customReferenceAmount: number;
+  customMaxReferenceAmount: number;
+  customCalibrationUsed: boolean;
   cards: PlannedCard[];
 }
 
@@ -101,7 +105,8 @@ export interface Copy {
   combination: string;
   balanceSufficient: (balance: string, remaining: string) => string;
   balanceInsufficient: (missing: string) => string;
-  customEstimate: (amount: string) => string;
+  customEstimate: (amount: string, maxAmount: string, calibrated: boolean) => string;
+  customMaximumPoints: (amount: string) => string;
   savedFallback: string;
   clear: string;
   notice: string;

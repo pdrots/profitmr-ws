@@ -16,7 +16,7 @@ The website does not access your Microsoft account or browse the Rewards catalog
 
 - Gift cards for Brazil (BRL), the United States (USD), and Spain (EUR).
 - Redemption comparisons based on costs entered by the user.
-- Proportional estimates for custom denominations, rounded up.
+- Custom denomination estimates based on reference and maximum costs, when both are provided.
 - Portuguese, English, and Spanish interface, with light and dark themes.
 - Preferences and calculator values stored locally in the browser.
 

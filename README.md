@@ -16,7 +16,7 @@ O site não acessa sua conta Microsoft nem consulta o catálogo do Rewards. Conf
 
 - Cartões do Brasil (BRL), Estados Unidos (USD) e Espanha (EUR).
 - Comparação de resgates com custos informados pelo usuário.
-- Estimativa proporcional para valores personalizados, arredondada para cima.
+- Estimativa para cartões personalizados baseada nos custos de referência e máximo, quando informados.
 - Interface em português, inglês e espanhol, com temas claro e escuro.
 - Preferências e valores da calculadora salvos localmente no navegador.
 

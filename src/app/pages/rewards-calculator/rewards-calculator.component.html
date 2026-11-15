@@ -128,6 +128,25 @@
             name="customPoints"
           />
         </label>
+        <label class="field">
+          <span>
+            {{ copy.customMaximumPoints(formatCurrency(region.customMax)) }}
+            @if (hasCustomRewardUrl) {
+              <a class="reward-link" [href]="customMaxRewardUrl" target="_blank" rel="noopener noreferrer">{{ copy.openReward }}</a>
+            }
+          </span>
+          <input
+            #customMaxPointsInput
+            type="number"
+            min="1"
+            step="1"
+            inputmode="numeric"
+            [placeholder]="copy.pointsPlaceholder"
+            [value]="customMaxPoints ?? ''"
+            (input)="updateValue('customMaxPoints', customMaxPointsInput.value)"
+            name="customMaxPoints"
+          />
+        </label>
       </div>
     </div>
 
@@ -165,7 +184,9 @@
               {{ copy.balanceInsufficient(formatPoints(missingPoints!)) }}
             </div>
           }
-          <p class="estimate-note">{{ copy.customEstimate(formatCurrency(result.customReferenceAmount)) }}</p>
+          <p class="estimate-note">
+            {{ copy.customEstimate(formatCurrency(result.customReferenceAmount), formatCurrency(result.customMaxReferenceAmount), result.customCalibrationUsed) }}
+          </p>
         </div>
       </section>
     }

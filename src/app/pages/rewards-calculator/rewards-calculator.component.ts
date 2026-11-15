@@ -29,6 +29,7 @@ export class RewardsCalculatorComponent {
   rates: Record<string, number | null> = {};
   customAmount = REGIONS.br.customMin;
   customPoints: number | null = null;
+  customMaxPoints: number | null = null;
   plan: PurchasePlan | null = null;
   calculationMessageKey: MessageKey | null = null;
   storageMessageKey: MessageKey | null = null;
@@ -109,11 +110,15 @@ export class RewardsCalculatorComponent {
     return `https://rewards.bing.com/redeem/sku/${this.region.customRewardSku}?c=${this.customAmount}`;
   }
 
+  get customMaxRewardUrl(): string {
+    return `https://rewards.bing.com/redeem/sku/${this.region.customRewardSku}?c=${this.region.customMax}`;
+  }
+
   get hasCustomRewardUrl(): boolean {
     return Boolean(this.region.customRewardSku);
   }
 
-  updateValue(field: 'gamePrice' | 'balancePoints' | 'customAmount' | 'customPoints', value: string): void {
+  updateValue(field: 'gamePrice' | 'balancePoints' | 'customAmount' | 'customPoints' | 'customMaxPoints', value: string): void {
     if (field === 'customAmount') {
       const nextAmount = parseNonNegativeNumber(value) ?? this.region.customMin;
       if (nextAmount !== this.customAmount) {
@@ -183,6 +188,8 @@ export class RewardsCalculatorComponent {
       customMax: this.region.customMax,
       customAmount: this.customAmount,
       customPoints: this.customPoints!,
+      customMaxPoints: this.customMaxPoints ?? null,
+      customPointsStep: this.region.customPointsStep,
     });
     this.plan = result.plan;
     this.calculationMessageKey = result.error;
@@ -214,6 +221,7 @@ export class RewardsCalculatorComponent {
     this.rates = createEmptyValues(this.region).rates;
     this.customAmount = this.region.customMin;
     this.customPoints = null;
+    this.customMaxPoints = null;
     this.plan = null;
     this.calculationMessageKey = null;
     this.persistValues();
@@ -242,6 +250,7 @@ export class RewardsCalculatorComponent {
       rates: { ...this.rates },
       customAmount: this.customAmount,
       customPoints: this.customPoints,
+      customMaxPoints: this.customMaxPoints,
     };
   }
 
@@ -251,6 +260,7 @@ export class RewardsCalculatorComponent {
     this.rates = { ...values.rates };
     this.customAmount = values.customAmount;
     this.customPoints = values.customPoints;
+    this.customMaxPoints = values.customMaxPoints ?? null;
   }
 
   private restoreValues(): void {

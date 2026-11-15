@@ -1,0 +1,70 @@
+  <section class="extension-section" aria-labelledby="extension-title">
+    <div class="extension-showcase">
+      <div class="extension-showcase-copy">
+        <h2 id="extension-title">{{ copy.extensionTitle }}</h2>
+        <p>{{ copy.extensionDescription }}</p>
+        <a
+          class="install-link"
+          href="https://addons.mozilla.org/pt-BR/firefox/addon/profitmr/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{ copy.installLink }} <span aria-hidden="true">↗</span>
+        </a>
+        <p class="install-note">{{ copy.installNote }}</p>
+      </div>
+
+      <div class="showcase-art" role="img" [attr.aria-label]="copy.extensionTitle">
+        <div class="showcase-orbit orbit-one" aria-hidden="true"></div>
+        <div class="showcase-orbit orbit-two" aria-hidden="true"></div>
+        <div class="preview-window">
+          <div class="preview-window-bar">
+            <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span>{{ copy.previewWindow }}</span>
+            <span aria-hidden="true">•••</span>
+          </div>
+          <div class="preview-content">
+            <div class="extension-preview-title">
+              <img class="extension-preview-icon" src="/profitmr-icon.png" alt="" />
+              <span><b>ProfitMR</b><small>{{ copy.calculatorLabel }}</small></span>
+            </div>
+            <div class="preview-purchase">
+              <div><small>{{ copy.previewGame }}</small><strong>{{ formatCurrency(79.9) }}</strong></div>
+              <div><small>{{ copy.previewBalance }}</small><strong>{{ formatPoints(30000) }} {{ copy.pointsUnit }}</strong></div>
+            </div>
+            <div class="preview-result">
+              <small>{{ copy.previewEstimate }}</small>
+              <strong>{{ formatPoints(25500) }} <span>{{ copy.points }}</span></strong>
+              <span class="preview-total">{{ formatCurrency(80) }} {{ copy.previewTotal }}</span>
+            </div>
+            <div class="preview-breakdown">
+              <span>{{ copy.previewCombination }}</span>
+              <div><span>1 × {{ copy.previewCard(formatCurrency(previewMainAmount())) }}</span><b>{{ formatPoints(9500) }} {{ copy.pointsUnit }}</b></div>
+              <div><span>2 × {{ copy.previewCard(formatCurrency(previewCustomAmount())) }}</span><b>{{ formatPoints(16000) }} {{ copy.pointsUnit }}</b></div>
+            </div>
+            <div class="extension-preview-status"><span aria-hidden="true">✓</span> {{ copy.previewRead }}</div>
+          </div>
+        </div>
+        <span class="preview-disclaimer">{{ copy.previewDisclaimer }}</span>
+      </div>
+    </div>
+
+    <div class="extension-features">
+      <article class="extension-feature">
+        <span class="feature-number">01</span>
+        <h3>{{ copy.featureReadTitle }}</h3>
+        <p>{{ copy.featureRead }}</p>
+      </article>
+      <article class="extension-feature">
+        <span class="feature-number">02</span>
+        <h3>{{ copy.featureEstimateTitle }}</h3>
+        <p>{{ copy.featureEstimate }}</p>
+      </article>
+      <article class="extension-feature">
+        <span class="feature-number">03</span>
+        <h3>{{ copy.featurePrivacyTitle }}</h3>
+        <p>{{ copy.featurePrivacy }}</p>
+      </article>
+    </div>
+
+  </section>

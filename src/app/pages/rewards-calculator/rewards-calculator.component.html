@@ -1,0 +1,193 @@
+<main class="calculator-page" [attr.lang]="language">
+  <app-calculator-header
+    [copy]="copy"
+    [region]="region"
+    [regionId]="regionId"
+    [regionOptions]="regionOptions"
+    [language]="language"
+    [theme]="theme"
+    (regionChange)="changeRegion($event)"
+    (languageChange)="changeLanguage($event)"
+    (themeToggle)="toggleTheme()"
+  />
+
+  <section class="intro" aria-labelledby="page-title">
+    <p class="eyebrow"> {{ copy.eyebrow }} · {{ copy.regionName(region) }}</p>
+    <h1 id="page-title">{{ copy.titleFirst }} {{ formatCurrency(500) }}.<br /><span>{{ copy.titleSecond }}</span></h1>
+    <p class="description">{{ copy.description }}</p>
+  </section>
+
+  <section id="calculator" class="calculator" [attr.aria-label]="copy.calculatorLabel">
+    <div class="calculator-heading">
+      <div>
+        <p class="card-eyebrow">{{ copy.cardEyebrow }}</p>
+        <h2>{{ copy.question }}</h2>
+      </div>
+    </div>
+
+    <div class="field-grid purchase-fields">
+      <label class="field">
+        <span>{{ copy.gamePrice }} ({{ region.currency }})</span>
+        <input
+          #gamePriceInput
+          type="number"
+          min="0.01"
+          max="10000"
+          step="0.01"
+          inputmode="decimal"
+          [placeholder]="copy.pricePlaceholder"
+          [value]="gamePrice ?? ''"
+          (input)="updateValue('gamePrice', gamePriceInput.value)"
+          name="gamePrice"
+        />
+      </label>
+      <label class="field">
+        <span>{{ copy.balance }}</span>
+        <input
+          #balanceInput
+          type="number"
+          min="0"
+          step="1"
+          inputmode="numeric"
+          [placeholder]="copy.balancePlaceholder"
+          [value]="balancePoints ?? ''"
+          (input)="updateValue('balancePoints', balanceInput.value)"
+          name="balancePoints"
+        />
+      </label>
+    </div>
+
+    <div class="rates-heading">
+      <div>
+        <h3>{{ copy.ratesTitle }}</h3>
+        <p>{{ copy.ratesDescription }}</p>
+      </div>
+      <span class="rate-region">{{ copy.regionName(region) }} · {{ region.currency }}</span>
+    </div>
+
+    <div class="field-grid rate-fields" [class.rate-fields-many]="fixedAmounts.length > 3">
+      @for (amount of fixedAmounts; track amount) {
+        <label class="field">
+          <span>
+            {{ copy.cardFor(formatCurrency(amount)) }} · {{ copy.points }}
+            @if (fixedRewardUrl(amount); as rewardUrl) {
+              <a class="reward-link" [href]="rewardUrl" target="_blank" rel="noopener noreferrer">{{ copy.openReward }}</a>
+            }
+          </span>
+          <input
+            #rateInput
+            type="number"
+            min="1"
+            step="1"
+            inputmode="numeric"
+            [placeholder]="copy.pointsPlaceholder"
+            [value]="rateFor(amount) ?? ''"
+            (input)="updateRate(amount, rateInput.value)"
+            [name]="'rate-' + amount"
+          />
+        </label>
+      }
+    </div>
+
+    <div class="custom-rate">
+      <div class="custom-rate-copy">
+        <h3>
+          {{ copy.customCard }}
+          @if (hasCustomRewardUrl) {
+            <a class="reward-link" [href]="customRewardUrl" target="_blank" rel="noopener noreferrer">{{ copy.openReward }}</a>
+          }
+        </h3>
+        <p>{{ copy.customDescription(formatCurrency(region.customMin), formatCurrency(region.customMax)) }}</p>
+      </div>
+      <div class="custom-inputs">
+        <label class="field">
+          <span>{{ copy.customAmount }} ({{ region.currency }})</span>
+          <input
+            #customAmountInput
+            type="number"
+            [min]="region.customMin"
+            [max]="region.customMax"
+            step="1"
+            inputmode="numeric"
+            [value]="customAmount"
+            (input)="updateValue('customAmount', customAmountInput.value)"
+            name="customAmount"
+          />
+        </label>
+        <label class="field">
+          <span>{{ copy.shownPoints }}</span>
+          <input
+            #customPointsInput
+            type="number"
+            min="1"
+            step="1"
+            inputmode="numeric"
+            [placeholder]="copy.pointsPlaceholder"
+            [value]="customPoints ?? ''"
+            (input)="updateValue('customPoints', customPointsInput.value)"
+            name="customPoints"
+          />
+        </label>
+      </div>
+    </div>
+
+    <p class="calculation-message" role="status">{{ calculationMessage }}</p>
+    <button class="calculate-button" type="button" [disabled]="!canCalculate" (click)="calculateStrategy()">
+      {{ copy.calculate }} <span aria-hidden="true">↗</span>
+    </button>
+
+    @if (plan; as result) {
+      <section class="results" aria-live="polite" [attr.aria-label]="copy.resultsLabel">
+        <div class="estimated">
+          <span>{{ copy.estimateFor }} {{ formatCurrency(gamePrice!) }}</span>
+          <strong>{{ formatPoints(result.totalPoints) }} {{ copy.points }}</strong>
+          <small>
+            {{ formatCurrency(displayAmount(result.totalAmount)) }} {{ copy.cardsTotal }}
+            @if (displayAmount(result.totalAmount) > gamePrice!) {
+              · {{ formatCurrency(displayAmount(result.totalAmount) - gamePrice!) }} {{ copy.abovePrice }}
+            }
+          </small>
+        </div>
+        <div class="strategy">
+          <h3>{{ copy.combination }}</h3>
+          @for (card of result.cards; track card.amount + ':' + card.points) {
+            <div class="strategy-row">
+              <span>{{ card.count }} × {{ copy.cardFor(formatCurrency(displayAmount(card.amount))) }}</span>
+              <strong>{{ formatPoints(card.count * card.points) }} {{ copy.points }}</strong>
+            </div>
+          }
+          @if (affordable === true) {
+            <div class="balance-status affordable">
+              {{ copy.balanceSufficient(formatPoints(balancePoints!), formatPoints(remainingPoints!)) }}
+            </div>
+          } @else if (affordable === false) {
+            <div class="balance-status insufficient">
+              {{ copy.balanceInsufficient(formatPoints(missingPoints!)) }}
+            </div>
+          }
+          <p class="estimate-note">{{ copy.customEstimate(formatCurrency(result.customReferenceAmount)) }}</p>
+        </div>
+      </section>
+    }
+
+    <div class="calculator-footer">
+      <p class="save-status" role="status">{{ storageMessage || copy.savedFallback }}</p>
+      <button type="button" class="clear-button" (click)="clearValues()">{{ copy.clear }}</button>
+    </div>
+  </section>
+
+  <aside class="notice">
+    <span class="notice-icon" aria-hidden="true">i</span>
+    <p>{{ copy.notice }}</p>
+  </aside>
+
+  <app-extension-showcase [copy]="copy" [region]="region" [language]="language" />
+
+  <footer class="page-footer">
+    <span>{{ copy.footerEstimate }}</span>
+    <a href="https://rewards.microsoft.com/" target="_blank" rel="noopener noreferrer">
+      {{ copy.checkRewards }} <span aria-hidden="true">↗</span>
+    </a>
+  </footer>
+
+</main>

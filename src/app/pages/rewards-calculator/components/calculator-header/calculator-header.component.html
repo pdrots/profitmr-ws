@@ -1,0 +1,54 @@
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="p.">p<span>.</span></a>
+    <div class="page-controls">
+      <details class="menu-control" #regionMenu (toggle)="closeOtherMenu(regionMenu, languageMenu)">
+        <summary [attr.aria-label]="copy.region" [title]="copy.region">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3" y="6" width="18" height="12" rx="2" />
+            <circle cx="12" cy="12" r="2.5" />
+            <path d="M7 9h.01M17 15h.01" />
+          </svg>
+          <span>{{ region.currency }}</span>
+          <svg class="menu-chevron" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4" /></svg>
+        </summary>
+        <div class="menu-popover" role="group" [attr.aria-label]="copy.region">
+          @for (option of regionOptions; track option.id) {
+            <button type="button" class="menu-option" [class.selected]="regionId === option.id" [attr.aria-pressed]="regionId === option.id" (click)="selectRegion(option.id, regionMenu)">
+              <span>{{ copy.regionName(option) }}</span>
+              <span class="option-meta">{{ option.currency }}</span>
+            </button>
+          }
+        </div>
+      </details>
+      <details class="menu-control" #languageMenu (toggle)="closeOtherMenu(languageMenu, regionMenu)">
+        <summary [attr.aria-label]="copy.language" [title]="copy.language">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M3.5 9h17M3.5 15h17M12 3c2.3 2.4 3.5 5.4 3.5 9S14.3 18.6 12 21c-2.3-2.4-3.5-5.4-3.5-9S9.7 5.4 12 3Z" />
+          </svg>
+          <span>{{ language === 'pt-BR' ? 'PT' : language === 'en-US' ? 'EN' : 'ES' }}</span>
+          <svg class="menu-chevron" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4" /></svg>
+        </summary>
+        <div class="menu-popover language-popover" role="group" [attr.aria-label]="copy.language">
+          @for (option of languageOptions; track option.value) {
+            <button type="button" class="menu-option" [class.selected]="language === option.value" [attr.aria-pressed]="language === option.value" (click)="selectLanguage(option.value, languageMenu)">
+              <span>{{ option.label }}</span>
+              <span class="option-meta">{{ option.value === 'pt-BR' ? 'PT' : option.value === 'en-US' ? 'EN' : 'ES' }}</span>
+            </button>
+          }
+        </div>
+      </details>
+      <button class="theme-toggle" type="button" [attr.aria-label]="themeButtonLabel" [title]="themeButtonLabel" (click)="toggleTheme()">
+        @if (theme === 'dark') {
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+          </svg>
+        } @else {
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.2 15.4A8.5 8.5 0 0 1 8.6 3.8 8.5 8.5 0 1 0 20.2 15.4Z" />
+          </svg>
+        }
+      </button>
+    </div>
+  </header>

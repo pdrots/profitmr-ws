@@ -1,0 +1,194 @@
+:root {
+  color-scheme: light;
+  --paper: #f7f8f3;
+  --ink: #202820;
+  --muted: #687168;
+  --green: #c9e8bc;
+  --green-dark: #4c7851;
+
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--paper);
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--ink);
+  margin: 0;
+  min-width: 320px;
+}
+
+a:focus-visible {
+  outline: 3px solid #6c9d63;
+  outline-offset: 4px;
+}
+
+::selection {
+  background: #c9e8bc;
+  color: #202820;
+}
+
+app-rewards-calculator[data-theme='dark'] {
+  display: block;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 82% 13%, rgba(56, 83, 54, 0.3), transparent 34rem),
+    #151a16;
+  color: #edf2eb;
+}
+
+app-rewards-calculator[data-theme='dark'] .brand,
+app-rewards-calculator[data-theme='dark'] .calculator-heading h2,
+app-rewards-calculator[data-theme='dark'] .extension-showcase-copy h2,
+app-rewards-calculator[data-theme='dark'] .extension-feature h3,
+app-rewards-calculator[data-theme='dark'] .field > span,
+app-rewards-calculator[data-theme='dark'] .strategy-row,
+app-rewards-calculator[data-theme='dark'] .preview-purchase strong,
+app-rewards-calculator[data-theme='dark'] .preview-breakdown > span,
+app-rewards-calculator[data-theme='dark'] .preview-breakdown b,
+app-rewards-calculator[data-theme='dark'] .extension-preview-title b,
+app-rewards-calculator[data-theme='dark'] .menu-option {
+  color: #e4ebe2;
+}
+
+app-rewards-calculator[data-theme='dark'] .back-link,
+app-rewards-calculator[data-theme='dark'] .page-footer a,
+app-rewards-calculator[data-theme='dark'] .reward-link,
+app-rewards-calculator[data-theme='dark'] .clear-button,
+app-rewards-calculator[data-theme='dark'] .eyebrow,
+app-rewards-calculator[data-theme='dark'] .card-eyebrow,
+app-rewards-calculator[data-theme='dark'] .intro h1 span,
+app-rewards-calculator[data-theme='dark'] .preview-heading > span:first-child,
+app-rewards-calculator[data-theme='dark'] .feature-number,
+app-rewards-calculator[data-theme='dark'] .estimated strong,
+app-rewards-calculator[data-theme='dark'] .affordable,
+app-rewards-calculator[data-theme='dark'] .extension-preview-status {
+  color: #a7d29d;
+}
+
+app-rewards-calculator[data-theme='dark'] .rates-heading p,
+app-rewards-calculator[data-theme='dark'] .custom-rate-copy p,
+app-rewards-calculator[data-theme='dark'] .field small,
+app-rewards-calculator[data-theme='dark'] .estimated span,
+app-rewards-calculator[data-theme='dark'] .estimated small,
+app-rewards-calculator[data-theme='dark'] .estimate-note,
+app-rewards-calculator[data-theme='dark'] .save-status,
+app-rewards-calculator[data-theme='dark'] .notice p,
+app-rewards-calculator[data-theme='dark'] .extension-showcase-copy > p:not(.eyebrow),
+app-rewards-calculator[data-theme='dark'] .extension-feature p,
+app-rewards-calculator[data-theme='dark'] .preview-purchase small,
+app-rewards-calculator[data-theme='dark'] .preview-result > small,
+app-rewards-calculator[data-theme='dark'] .preview-total,
+app-rewards-calculator[data-theme='dark'] .preview-breakdown,
+app-rewards-calculator[data-theme='dark'] .option-meta,
+app-rewards-calculator[data-theme='dark'] .menu-control summary .menu-chevron,
+app-rewards-calculator[data-theme='dark'] .extension-preview-title small,
+app-rewards-calculator[data-theme='dark'] .page-footer,
+app-rewards-calculator[data-theme='dark'] .preview-disclaimer,
+app-rewards-calculator[data-theme='dark'] .preview-window-bar {
+  color: #a9b5a8;
+}
+
+app-rewards-calculator[data-theme='dark'] .extension-section,
+app-rewards-calculator[data-theme='dark'] .calculator,
+app-rewards-calculator[data-theme='dark'] .preview-window,
+app-rewards-calculator[data-theme='dark'] .extension-feature,
+app-rewards-calculator[data-theme='dark'] .extension-preview,
+app-rewards-calculator[data-theme='dark'] .menu-popover {
+  border-color: #343e34;
+  background-color: #202720;
+}
+
+app-rewards-calculator[data-theme='dark'] .extension-showcase {
+  border-color: #384539;
+  background:
+    radial-gradient(ellipse at 82% 45%, rgba(77, 116, 72, 0.28), transparent 58%),
+    #222c22;
+}
+
+app-rewards-calculator[data-theme='dark'] .calculator {
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.22);
+}
+
+app-rewards-calculator[data-theme='dark'] .menu-control summary,
+app-rewards-calculator[data-theme='dark'] .calculator-page .field input,
+app-rewards-calculator[data-theme='dark'] .calculator-page .field select {
+  border-color: #3a463a;
+  background: #171d18;
+  color: #edf2eb;
+  color-scheme: dark;
+}
+
+app-rewards-calculator[data-theme='dark'] .menu-popover {
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.38);
+}
+
+app-rewards-calculator[data-theme='dark'] .menu-option:hover,
+app-rewards-calculator[data-theme='dark'] .menu-option.selected {
+  background: #304132;
+  color: #b7d9ae;
+}
+
+app-rewards-calculator[data-theme='dark'] .menu-control summary:hover {
+  border-color: #53694f;
+  background: #252e25;
+}
+
+app-rewards-calculator[data-theme='dark'] .theme-toggle {
+  border-color: #53694f;
+  background: #d3e6ca;
+  color: #293d2b;
+}
+
+app-rewards-calculator[data-theme='dark'] .theme-toggle:hover {
+  background: #e3f0dc;
+}
+
+app-rewards-calculator[data-theme='dark'] .custom-rate {
+  border-color: #343e34;
+  background: #252e25;
+}
+
+app-rewards-calculator[data-theme='dark'] .results,
+app-rewards-calculator[data-theme='dark'] .preview-result {
+  background: #263528;
+}
+
+app-rewards-calculator[data-theme='dark'] .estimated,
+app-rewards-calculator[data-theme='dark'] .strategy-row,
+app-rewards-calculator[data-theme='dark'] .preview-breakdown > div,
+app-rewards-calculator[data-theme='dark'] .extension-preview,
+app-rewards-calculator[data-theme='dark'] .preview-window-bar {
+  border-color: #384638;
+}
+
+app-rewards-calculator[data-theme='dark'] .rate-region,
+app-rewards-calculator[data-theme='dark'] .sparkle,
+app-rewards-calculator[data-theme='dark'] .preview-status,
+app-rewards-calculator[data-theme='dark'] .extension-preview-icon,
+app-rewards-calculator[data-theme='dark'] .notice-icon {
+  background: #304132;
+  color: #b7d9ae;
+}
+
+app-rewards-calculator[data-theme='dark'] .notice {
+  border-color: #343e34;
+  background: rgba(32, 39, 32, 0.72);
+}
+
+app-rewards-calculator[data-theme='dark'] .insufficient,
+app-rewards-calculator[data-theme='dark'] .calculation-message {
+  color: #e6a980;
+}
+
+app-rewards-calculator[data-theme='dark'] .calculate-button:disabled {
+  background: #52634f;
+}

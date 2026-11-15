@@ -1,0 +1,196 @@
+.topbar {
+  display: flex;
+  gap: 18px;
+  height: 52px;
+}
+
+.page-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.menu-control {
+  position: relative;
+}
+
+.menu-control summary {
+  display: flex;
+  min-width: 74px;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 10px;
+  border: 1px solid rgba(32, 40, 32, 0.1);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.76);
+  color: #344135;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 750;
+  list-style: none;
+  transition: background 150ms ease, border-color 150ms ease, transform 150ms ease;
+  user-select: none;
+}
+
+.menu-control summary::-webkit-details-marker {
+  display: none;
+}
+
+.menu-control summary:hover {
+  transform: translateY(-1px);
+  border-color: rgba(76, 120, 81, 0.35);
+  background: #fff;
+}
+
+.menu-control summary:focus-visible,
+.menu-option:focus-visible,
+.theme-toggle:focus-visible {
+  outline: 3px solid rgba(106, 149, 97, 0.35);
+  outline-offset: 3px;
+}
+
+.menu-control summary > svg:first-child {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+
+.menu-control summary .menu-chevron {
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke: #8a9488;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.6;
+  transition: transform 150ms ease;
+}
+
+.menu-control[open] summary .menu-chevron {
+  transform: rotate(180deg);
+}
+
+.menu-popover {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 8px);
+  right: 0;
+  display: grid;
+  width: max-content;
+  min-width: 190px;
+  gap: 3px;
+  padding: 6px;
+  border: 1px solid #e4e9e1;
+  border-radius: 13px;
+  background: #fff;
+  box-shadow: 0 14px 35px rgba(32, 40, 32, 0.14);
+}
+
+.language-popover {
+  min-width: 155px;
+}
+
+.menu-option {
+  display: flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #344135;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  text-align: left;
+}
+
+.menu-option:hover,
+.menu-option.selected {
+  background: #f0f5ed;
+  color: #315d37;
+}
+
+.option-meta {
+  color: #788177;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+}
+
+.theme-toggle {
+  display: grid;
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border: 1px solid rgba(32, 40, 32, 0.1);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.76);
+  color: #344135;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, box-shadow 150ms ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-1px);
+  border-color: rgba(76, 120, 81, 0.35);
+  background: #fff;
+}
+
+.theme-toggle svg {
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+
+.brand {
+  color: #202820;
+  font-size: 30px;
+  font-weight: 850;
+  letter-spacing: -0.08em;
+  text-decoration: none;
+}
+
+.brand span {
+  color: #65925d;
+}
+
+@media (max-width: 650px) {
+  .topbar {
+    height: auto;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+  }
+
+  .page-controls {
+    order: 3;
+    width: 100%;
+    justify-content: flex-start;
+    margin: 0;
+  }
+
+  .menu-control summary {
+    min-width: 68px;
+    min-height: 38px;
+    padding: 0 8px;
+  }
+}
+
+:host {
+  display: block;
+}
